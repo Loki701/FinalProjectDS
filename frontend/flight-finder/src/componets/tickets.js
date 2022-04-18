@@ -3,13 +3,10 @@ import React from 'react'
 function Ticket(props){
 
     return(
-        <div>
-            <p>
-                <span style={{ fontWeight: 'bold, underline' }}>{props.ticket.date}</span>
-                {props.ticket.agency}
-                {props.ticket.price}
-                <hr></hr>
-            </p>
+        <div className='ticket'>
+            <span style={{ fontWeight: 'bold, underline', marginLeft: "50px" }}>{props.ticket.date}</span>
+            <span style={{ fontWeight: 'bold, underline', marginLeft: "50px"}}>{props.ticket.agency}</span>
+            <span style={{ fontWeight: 'bold, underline', marginLeft: "50px"}}>{props.ticket.price}</span>
         </div>
     )
 }

@@ -30,12 +30,12 @@ app.add_middleware(
 
 @app.get("/api/result/////0")
 async def get_default():
-    return [{"date": "32-24-2434", "agency":"AAirline", "price": 100}]
+    return [{"date": "32-24-2434", "agency":"AAirline", "price": 100},
+    {"date": "1", "agency":"LAX", "price": 158}]
 
 @app.get("/api/result/{originAirport}/{destinationAirport}/{fromDate}/{toDate}/{numDays}")
 async def get_response(originAirport,destinationAirport,fromDate,toDate,numDays):
     #Do everything and then return response
-    print(title)
     response = [{"date": originAirport,
     "agency": destinationAirport,
     "price": 1000}]
