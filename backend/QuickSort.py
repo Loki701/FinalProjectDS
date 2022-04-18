@@ -1,26 +1,42 @@
-from ping import *
-
-
-def Parition(ticketList, low, high) -> int:
-    i = low - 1
-    pivot = Tickets(ticketList[high].airliner, ticketList[high].startDate, ticketList[high].price)
-
+def partition(arr, low, high):
+    i = (low-1)         # index of smaller element
+    pivot = arr[high].price     # pivot
+ 
     for j in range(low, high):
-        if ticketList[high].price <= pivot.price:
-            ++i
-            (ticketList[i], ticketList[j]) = (ticketList[j], ticketList[i])
-
-    (ticketList[i+1], ticketList[high]) = (ticketList[high], ticketList[i+1])
-    return (i + 1)
-
-
-def Sort(ticketList, low, high):
-    if len(ticketList) == 1:
-        return ticketList
-    # as long as low doesn't pass high, we will continue to parition the array
+ 
+        # If current element is smaller than or
+        # equal to pivot
+        if arr[j].price <= pivot:
+ 
+            # increment index of smaller element
+            i = i+1
+            arr[i], arr[j] = arr[j], arr[i]
+ 
+    arr[i+1], arr[high] = arr[high], arr[i+1]
+    return (i+1)
+ 
+# The main function that implements QuickSort
+# arr[] --> Array to be sorted,
+# low  --> Starting index,
+# high  --> Ending index
+ 
+# Function to do Quick sort
+ 
+ 
+def quickSort(arr, low, high):
+    if len(arr) == 1:
+        return arr
     if low < high:
-        p = Parition(ticketList, low, high)
+ 
+        # pi is partitioning index, arr[p] is now
+        # at right place
+        pi = partition(arr, low, high)
+ 
+        # Separately sort elements before
+        # partition and after partition
+        quickSort(arr, low, pi-1)
+        quickSort(arr, pi+1, high)
 
-    # we will then call QuickSort on the lower half and upper half of the way, since everything lower than the pivot is to the left and higher to the right
-    Sort(ticketList, low, p - 1)
-    Sort(ticketList, p + 1, high)
+def printQ(arr):
+    for i in range(len(arr)):
+        print(arr[i].price)

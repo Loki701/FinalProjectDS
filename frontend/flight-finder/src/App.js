@@ -2,7 +2,7 @@ import './App.css';
 import React, {useState} from 'react';
 import axios from 'axios';
 import ListResult from './componets/ListResult';
-
+import SearchBar from './componets/searchBar';
 function App() {
   // result should have the format of {date:, agency:, price:}
   const [result, setResult] = useState([{}])
@@ -11,69 +11,13 @@ function App() {
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
   const [numDays, setNumDays] = useState(0)
-  const [errors, setErros] = useState({})
   const [subHeaderStyle, setSubHeaderStyle] = useState("subHeader-active")
   const [cardBody,setCardBody] = useState("card-body")
+  const [resultStyle, setResultStyle] = useState("result")
   
   //Post seach Results
   
-  const handleValidation = () => {
-    let errors = {};
-    let formIsValid = true;
-    
-    //Origin
-    if (originAirport == "") {
-      formIsValid = false;
-      errors["OriginAirport"] = "Cannot be empty";
-    }
-
-    if (typeof originAirport !== "undefined") {
-      if (!originAirport.match(/^[a-zA-Z]+$/)) {
-        formIsValid = false;
-        errors["OriginAirport"] = "Only letters";
-      }
-    }
-    //Destination
-    if (!destinationAirport) {
-      formIsValid = false;
-      errors["destinationAirport"] = "Cannot be empty";
-    }
-    
-    if (typeof destinationAirport !== "undefined") {
-      if (!destinationAirport.match(/^[a-zA-Z]+$/)) {
-        formIsValid = false;
-        errors["destinationAirport"] = "Only letters";
-      }
-    }
-    //from date
-    if (!fromDate) {
-      formIsValid = false;
-      errors["fromDate"] = "Cannot be empty";
-    }
-    
-    if (typeof fromDate !== "undefined") {
-      if (!fromDate.match(/^[a-zA-Z]+$/)) {
-        formIsValid = false;
-        errors["fromDate"] = "Only letters";
-      }
-    }
-    //todate
-    if (!toDate) {
-      formIsValid = false;
-      errors["todate"] = "Cannot be empty";
-    }
-    
-    if (typeof toDate !== "undefined") {
-      if (!toDate.match(/^[a-zA-Z]+$/)) {
-        formIsValid = false;
-        errors["toDate"] = "Only letters";
-      }
-    }
-    
-    
-    setErros(errors);
-    return formIsValid;
-  }
+  
   const handleStartClick =() =>{
     setSubHeaderStyle("subHeader");
     setCardBody("card-body-active")
@@ -93,6 +37,7 @@ function App() {
       .then(res=>{
         setResult(res.data)
       });
+    setResultStyle("result-active");
   }
   
 
@@ -109,22 +54,26 @@ function App() {
       <div className={cardBody}>
         <p>Chose your traveling destination</p>
           <form className="card-text">
-            <input type="search" placeholder="From" onChange={event => setOriginAirport(event.target.value)} required/>
-            <input type="search" placeholder="to" onChange={event => setDestinationAirport(event.target.value)} required/>
-
+            <div className='searchBoxes'>
+            <div className='searchAirport'>
+            <SearchBar stateChanger={setOriginAirport} state={originAirport}/>
+            </div>
+            <div className='searchAirport'>
+            <SearchBar stateChanger={setDestinationAirport} state={destinationAirport}/>
+            </div>
+            </div>
             <p>Time period available for travel!</p>
             <p>From:</p>
             <input type="date" onChange={event => setFromDate(event.target.value)}required/>
             <p>to:</p>
             <input type="date" onChange={event => setToDate(event.target.value)}required/>
             <p>amount of days</p>
-            <input type="range" min="0" max="10" onChange={event => setNumDays(event.target.value)}></input>
+            <input type="range" min="0" max="=5" onChange={event => setNumDays(event.target.value)}></input>
             <input type="submit" style={{'borderRadius':'50px',"fontWeight":"bold"}} onClick={addResultHadler} value="Search"/>
         </form>
       </div>
-      <div className='result'>
+      <div className={resultStyle}>
         <p>Your Search Reasults</p>
-
         <ListResult result={result}/>
       </div>
       <div className='footer'>

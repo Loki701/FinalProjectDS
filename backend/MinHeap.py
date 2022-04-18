@@ -1,51 +1,31 @@
-import sys
+# Function to swap two nodes of the heap
 
 
-class MinHeap:
-    def __init__(self):
-        self.size = 0
-        self.heap = [0]
-        self.heap[0] = sys.float_info.min
+def swap(list, first, second):
+    (list[first], list[second]) = (
+        list[second], list[first])
 
-    # Function to swap two nodes of the heap
-    def swap(self, first, second):
-        (self.heap[first], self.heap[second]) = (
-            self.heap[second], self.heap[first])
+# Function to heapify the node at pos
 
-    # Function to heapify the node at pos
-    def HeapifyDown(self, ind):
-        largestVal = ind
-        leftChild = 2 * largestVal + 1
-        rightChild = 2 * largestVal + 2
 
-        if leftChild < self.size and self.heap[leftChild].price < self.heap[largestVal].price:
-            largestVal = leftChild
-        if rightChild < self.size and self.heap[rightChild] < self.heap[largestVal].price:
-            largestVal = rightChild
+def Heapify(list, size, ind):
+    lowestVal = ind
+    leftChild = 2 * lowestVal + 1
+    rightChild = 2 * lowestVal + 2
 
-        if(largestVal != ind):
-            temp = self.heap[ind]
-            self.heap[ind] = self.heap[largestVal]
-            self.heap[largestVal] = temp
-            self.HeapifyDown(largestVal)
+    if leftChild < size and list[leftChild].price < list[lowestVal].price:
+        lowestVal = leftChild
+    if rightChild < size and list[rightChild].price < list[lowestVal].price:
+        lowestVal = rightChild
 
-    # Function to insert a node into the heap
-    def insert(self, ele):
-        ++self.size
-        self.heap[self.size - 1] = ele
+    if(lowestVal != ind):
+        temp = list[ind]
+        list[ind] = list[lowestVal]
+        list[lowestVal] = temp
+        Heapify(list, size, lowestVal)
 
-        curr = self.size
 
-        while self.heap[curr].price < self.heap[self.parent(curr)].price:
-            self.swap(curr, self.parent(curr))
-            curr = self.parent(curr)
-
-    # Function to remove and return the minimum
-    # element from the heap
-    def Remove(self):
-        self.heap[0] = self.heap[self.size - 1]
-        --self.size
-        self.HeapifyDown(0)
-
-    def Peak(self):
-        return self.heap[0]
+def Print(list):
+    print(list[0].price)
+    for i in range(0, len(list)):
+        print(f"Parent: {list[i].price}")

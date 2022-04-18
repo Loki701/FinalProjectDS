@@ -1,0 +1,34 @@
+.searchBar{
+    margin:0;
+    padding:0;
+    width: 100%;
+}
+input[type=text]:focus{
+    background-color: lightblue;
+
+}
+.search-header{
+    width: 100%;;
+}
+.search-body{
+    display: none;
+}
+.search-body-active{
+    width: 100%;
+}
+ul.airPort-list{
+    margin:0;
+    padding: 0;
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    list-style: none;
+    text-align: left;
+    
+}
+li{
+    cursor: pointer;
+}
+.airPort-item{
+    padding:0;
+}

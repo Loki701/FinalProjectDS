@@ -25,18 +25,17 @@ body {
 .card-body{
     display: none;
 }
-input[type=text], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
+.result-activate{
+
+}
 .result{
     display: none;
-    border: 1px solid red;
+}
+.searchBoxes{
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    column-gap: 4rem;
 }
 .footer{
     position: fixed;
