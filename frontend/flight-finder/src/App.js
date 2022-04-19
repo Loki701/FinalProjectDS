@@ -6,7 +6,7 @@ import SearchBar from './componets/searchBar';
 
 function App() {
   // result should have the format of {date:, agency:, price:}
-  const [result, setResult] = useState([{}])
+  const [result, setResult] = useState([])
   const [originAirport, setOriginAirport] = useState('')
   const [destinationAirport, setDestinationAirport] = useState('')
   const [fromDate, setFromDate] = useState('')
@@ -24,7 +24,7 @@ function App() {
   const handleChangeInput =(e)=>{
     e.preventDefault();
     setCardBody("card-body-active")
-    setResult([{}])
+    setResult([])
     setResultStyle("result");
   }
   const addResultHadler = (event) =>{
@@ -44,6 +44,22 @@ function App() {
         setCardBody("card-body")
     }
   }
+  const OutPutResult = () =>{
+      if(result === undefined || result.length === 0 ){
+        return(
+        <div className="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        )
+      }
+      else{
+        return(
+        <div>
+          <p>Your Search Reasults</p>
+          <ListResult result={result}/>
+          <input type="submit" style={{'borderRadius':'50px',"fontWeight":"bold"}} onClick={handleChangeInput} value="Search other Dates!"/>
+        </div>
+        )
+      }
+  }
   
 
   return (
@@ -54,6 +70,7 @@ function App() {
       <div className={subHeaderStyle}>
         <p>At Flight finder we provide the user with the date/ticket at which we find the lowest price tickets during the desire period</p>
         <p>Start you adventure at a buget!</p>
+        
         <button className='btt-start' onClick={handleStartClick} >Start</button>
       </div>
       <div className={cardBody}>
@@ -78,9 +95,7 @@ function App() {
         </form>
       </div>
       <div className={resultStyle}>
-        <p>Your Search Reasults</p>
-        <ListResult result={result}/>
-        <input type="submit" style={{'borderRadius':'50px',"fontWeight":"bold"}} onClick={handleChangeInput} value="Search other Dates!"/>
+        <OutPutResult />
       </div>
       <div className='footer'>
         <h6>Copyright 2022, All rights reserved &copy;</h6>
