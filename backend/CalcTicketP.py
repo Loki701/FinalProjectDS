@@ -1,5 +1,4 @@
 from duffel_api import Duffel
-from datetime import date
 from datetime import datetime
 from datetime import timedelta
 import QuickSort
@@ -18,13 +17,13 @@ def CalculateCheapestTicketPrice(originAirport, destAirport, startDate, endDate,
     # originAirport,destinationAirport,startDate,endDate,numDays
     client = Duffel(
         access_token="duffel_test_vhFhSq36gKjJVF551Y6n49K4Srx4jcqR53updLFznnz")
-    list = []
     start = datetime.strptime(startDate, "%Y-%m-%d").date()
     end = datetime.strptime(endDate, "%Y-%m-%d").date()
     rangeOfDays = end - start
+    
+    list = []
     for i in range(rangeOfDays.days):
-        day = datetime.strptime(
-            startDate, "%Y-%m-%d").date() + timedelta(days=i)
+        day = datetime.strptime(startDate, "%Y-%m-%d").date() + timedelta(days=i)
         slices = [
             {
                 "origin": originAirport,
@@ -43,12 +42,13 @@ def CalculateCheapestTicketPrice(originAirport, destAirport, startDate, endDate,
 
         for i, offer in enumerate(offers):
             if offer.owner.name != "Duffel Airways":
-                list.append(Tickets(
-                    offer.slices[0].segments[0].departing_at.date(), offer.owner.name, float(offer.total_amount)))
+                list.append(Tickets(offer.slices[0].segments[0].departing_at.date(), offer.owner.name, float(offer.total_amount)))
+    
     HeapSort.heapSort(list)
     cheapestTicketsDict = {}
     counter = 0
-    while(len(cheapestTicketsDict) < numDays):
+
+    while(len(cheapestTicketsDict) <= int(numDays)):
         if(len(cheapestTicketsDict) == 0):
             cheapestTicketsDict[list[0].date] = list[0]
         if(cheapestTicketsDict.keys != list[counter].date):
@@ -56,15 +56,17 @@ def CalculateCheapestTicketPrice(originAirport, destAirport, startDate, endDate,
         counter += 1
 
     cheapestTickets = []
-    for i in cheapestTicketsDict.values:
-        cheapestTickets.append(i)
+    for i in cheapestTicketsDict:
+        cheapestTickets.append(cheapestTicketsDict[i])
+
     return cheapestTickets
+    
 
 
-list = CalculateCheapestTicketPrice(
-    "LAX", "NYC", "2022-05-23", "2022-05-28", 5)
-for i in list:
-    print(f"{i.date}\t{i.agency}\t{i.price}")
+# list = CalculateCheapestTicketPrice(
+#     "LAX", "NYC", "2022-05-23", "2022-05-28", 5)
+# for i in list:
+#     print(f"{i.agency}\t{i.date}\t{i.price}")
 
 
 def HeapSortTiming(list):

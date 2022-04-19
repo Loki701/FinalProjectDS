@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import ListResult from './componets/ListResult';
 import SearchBar from './componets/searchBar';
+
 function App() {
   // result should have the format of {date:, agency:, price:}
   const [result, setResult] = useState([{}])
@@ -10,34 +11,38 @@ function App() {
   const [destinationAirport, setDestinationAirport] = useState('')
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
-  const [numDays, setNumDays] = useState(0)
+  const [numDays, setNumDays] = useState(1)
   const [subHeaderStyle, setSubHeaderStyle] = useState("subHeader-active")
   const [cardBody,setCardBody] = useState("card-body")
   const [resultStyle, setResultStyle] = useState("result")
-  
-  //Post seach Results
   
   
   const handleStartClick =() =>{
     setSubHeaderStyle("subHeader");
     setCardBody("card-body-active")
   }
+  const handleChangeInput =(e)=>{
+    e.preventDefault();
+    setCardBody("card-body-active")
+    setResult([{}])
+    setResultStyle("result");
+  }
   const addResultHadler = (event) =>{
     event.preventDefault();
-    // if(handleValidation){
-    //   alert("Searching...");
-    //   axios.get(`http://localhost:8000/api/result/${originAirport}/${destinationAirport}/${fromDate}/${toDate}/${numDays}`)
-    //     .then(res=>{
-    //       setResult(res.data)
-    //     });
-    // }else{
-    //   alert("Invalid Input!");
-    // }
-    axios.get(`http://localhost:8000/api/result/${originAirport}/${destinationAirport}/${fromDate}/${toDate}/${numDays}`)
-      .then(res=>{
-        setResult(res.data)
-      });
-    setResultStyle("result-active");
+    if(originAirport === '' || destinationAirport ==='' || originAirport=== destinationAirport){
+      alert("You must Select Airport(s)!")
+    }
+    else if(fromDate === '' || toDate === ''){
+      alert("You must Select Dates!")
+    }
+    else{
+      axios.get(`http://localhost:8000/api/result/${originAirport}/${destinationAirport}/${fromDate}/${toDate}/${numDays}`)
+        .then(res=>{
+          setResult(res.data)
+        });
+        setResultStyle("result-active");
+        setCardBody("card-body")
+    }
   }
   
 
@@ -68,13 +73,14 @@ function App() {
             <p>to:</p>
             <input type="date" onChange={event => setToDate(event.target.value)}required/>
             <p>amount of days</p>
-            <input type="range" min="0" max="=5" onChange={event => setNumDays(event.target.value)}></input>
+            <input type="text" onChange={event => setNumDays(event.target.value)} placeholder="1"></input>
             <input type="submit" style={{'borderRadius':'50px',"fontWeight":"bold"}} onClick={addResultHadler} value="Search"/>
         </form>
       </div>
       <div className={resultStyle}>
         <p>Your Search Reasults</p>
         <ListResult result={result}/>
+        <input type="submit" style={{'borderRadius':'50px',"fontWeight":"bold"}} onClick={handleChangeInput} value="Search other Dates!"/>
       </div>
       <div className='footer'>
         <h6>Copyright 2022, All rights reserved &copy;</h6>

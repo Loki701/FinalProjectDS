@@ -106,3 +106,15 @@ namespace QuickSort
             #   offer.owner.name, offer.slices[0].segment[0].departing_at, offer.total_amount))
 
         # offer_index = input("\nWhich offer do you wish to book?\n").strip()
+
+
+
+
+While the search of airport, do a wheel
+Fix the amount of days (between range they chose)
+Display days selected
+Make the website look better
+amount of days snap to numbers?
+Make result look nicer and sort dates
+Implemented search bar
+User input checking (wide umbrella)
