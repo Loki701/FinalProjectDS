@@ -1,3 +1,14 @@
+
+.search-text{
+  font-size:1.2rem;
+  font-family: Georgia;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 1px #919191,
+      1px 2px 1px #919191,
+      1px 3px 1px #919191,
+  1px 30px 60px #919191;
+}
 html { 
   height: 100vh;
   background: url(../public/largeHome.jpg) no-repeat center center fixed; 
@@ -25,7 +36,37 @@ html {
             user-select: none;
 		-webkit-tap-highlight-color: transparent;
 }
-
+.daysInput{
+  width: fit-content;
+}
+.dates-c{
+  width:100%;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  
+}
+.card-text{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: space-between;
+}
+.arrow-1 {
+  width:100px;
+  height:30px;
+  display: flex;
+}
+.arrow-1:before {
+  content: "";
+  background: currentColor;
+  width:15px;
+  clip-path: polygon(0 10px,calc(100% - 15px) 10px,calc(100% - 15px) 0,100% 50%,calc(100% - 15px) 100%,calc(100% - 15px) calc(100% - 10px),0 calc(100% - 10px));
+  animation: a1 3.5s infinite linear;
+}
+@keyframes a1 {
+  90%,100%{flex-grow: 1}
+}
 button {
   
 	width: 100px;
@@ -41,6 +82,18 @@ button {
   border-radius: 12px;
 	box-shadow: 5px 5px 0 rgb(38, 38, 38);
 	transition: 500ms ease-in-out;
+}
+.calendars{
+  background: url(../public/largeHome.jpg) no-repeat center center fixed;
+  border-radius: 5px;
+}
+.daysInput{
+  text-align: center;
+  height: 7%;
+  width: 7%;
+  margin-bottom: 20px;
+  background: url(../public/largeHome.jpg) no-repeat center center fixed;
+  border-radius: 5px;
 }
 .searchOther{
 	width: auto;
@@ -106,8 +159,8 @@ button:focus {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
   margin-top: 10%;
-  width: 40%;
-  height: 40%;
+  width: 30%;
+  height: 60%;
   border-radius: 10px;
   background: url(../public/largeHome.jpg) no-repeat center center fixed;
   padding: 20px;

@@ -1,3 +1,4 @@
+
 .searchBar{
     margin:0;
     padding:0;
@@ -6,6 +7,13 @@
 input[type=text]:focus{
     background-color: lightblue;
 
+}
+.inputbar{
+    text-align: center;
+    background: url(../../public/largeHome.jpg) no-repeat center center fixed;
+    color: black;
+    width: 100%;
+    border-radius: 3px;
 }
 .search-header{
     width: 100%;;
@@ -17,9 +25,12 @@ input[type=text]:focus{
     width: 100%;
 }
 ul.airPort-list{
+    background: white;
+    color:black;
     margin:0;
     padding: 0;
-    width: 100%;
+    position:fixed;
+    width: auto;
     display:flex;
     flex-direction: column;
     list-style: none;
