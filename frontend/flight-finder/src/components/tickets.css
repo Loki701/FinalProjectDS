@@ -1,0 +1,16 @@
+.ticket{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    align-content: center;
+    margin:0;
+    padding:0;
+}
+.ticket-item{
+    margin-left: 2rem;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-family: Georgia;
+}

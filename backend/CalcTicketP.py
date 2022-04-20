@@ -15,14 +15,17 @@ class Tickets:
 
 def CalculateCheapestTicketPrice(originAirport, destAirport, startDate, endDate, numDays):
     # originAirport,destinationAirport,startDate,endDate,numDays
+    outputDay = int(numDays)
     client = Duffel(
         access_token="duffel_test_vhFhSq36gKjJVF551Y6n49K4Srx4jcqR53updLFznnz")
     start = datetime.strptime(startDate, "%Y-%m-%d").date()
     end = datetime.strptime(endDate, "%Y-%m-%d").date()
     rangeOfDays = end - start
+    if(rangeOfDays.days+1 < outputDay):
+        outputDay = rangeOfDays.days+1
     
     list = []
-    for i in range(rangeOfDays.days):
+    for i in range(rangeOfDays.days+1):
         day = datetime.strptime(startDate, "%Y-%m-%d").date() + timedelta(days=i)
         slices = [
             {
@@ -48,10 +51,10 @@ def CalculateCheapestTicketPrice(originAirport, destAirport, startDate, endDate,
     cheapestTicketsDict = {}
     counter = 0
 
-    while(len(cheapestTicketsDict) <= int(numDays)):
+    while(len(cheapestTicketsDict) < outputDay):
         if(len(cheapestTicketsDict) == 0):
             cheapestTicketsDict[list[0].date] = list[0]
-        if(cheapestTicketsDict.keys != list[counter].date):
+        if(list[counter].date not in cheapestTicketsDict):
             cheapestTicketsDict[list[counter].date] = list[counter]
         counter += 1
 

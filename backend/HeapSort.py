@@ -40,4 +40,4 @@ def heapSort(arr):
 
 def PrintHeap(arr, n):
     for i in range(n):
-        print(arr[i].price)
+        print(arr[i].date)
